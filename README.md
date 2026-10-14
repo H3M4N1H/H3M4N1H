@@ -43,6 +43,12 @@ STATUS        : BUILDING + LEARNING + SHIPPING
 | [snipe](https://github.com/H3M4N1H/snipe) | Opportunity alerts for CTFs, hackathons, internships, and competitions. |
 | [SpecFit](https://github.com/H3M4N1H/SpecFit) | System health monitoring and resource analysis. |
 
+## `PROJECT.MATRIX`
+
+<div align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/main/projects/projects.svg" alt="Featured project matrix">
+</div>
+
 ## `CORE.STACK`
 
 `Python` `Linux` `Networking` `Web Security` `Flask` `React` `Next.js` `TypeScript` `Docker` `AI/ML`
@@ -54,7 +60,7 @@ STATUS        : BUILDING + LEARNING + SHIPPING
 <div align="center">
   <img width="100%" src="https://streak-stats.demolab.com/?user=H3M4N1H&hide_border=true&background=0A101F&stroke=22D3EE&ring=A78BFA&fire=10B981&currStreakLabel=22D3EE&sideLabels=94A3B8&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=64748B&titleColor=22D3EE" alt="GitHub contribution streak">
   <br>
-  <img width="49%" src="https://github-readme-activity-graph.vercel.app/graph?username=H3M4N1H&bg_color=0A101F&color=22D3EE&line=A78BFA&point=10B981&area=true&hide_border=true&custom_title=CONTRIBUTION%20ACTIVITY" alt="GitHub contribution activity graph">
+  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=H3M4N1H&show_icons=true&hide_border=true&rank_icon=none&title_color=22D3EE&icon_color=10B981&text_color=94A3B8&bg_color=0A101F" alt="GitHub stats">
   <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=H3M4N1H&layout=compact&langs_count=8&hide_border=true&title_color=22D3EE&text_color=94A3B8&bg_color=0A101F" alt="Top languages">
 </div>
 
