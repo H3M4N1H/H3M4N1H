@@ -63,7 +63,7 @@
 </a>
 &nbsp;&nbsp;
 <a href="https://nodekraft.tech">
-  <img src="https://img.shields.io/badge/NodeKraft_Agency-0A101F?style=for-the-badge&labelColor=0A101F&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTIgNGgzbDYgOS41VjRoM3YxNmgtM0w1IDEwLjVWMjBIMnoiLz48cGF0aCBmaWxsPSIjRjc5MzFFIiBkPSJNMjIuNSA0aC0zLjZMMTQuOCAxMmw0LjEgOGgzLjZsLTQuMS04eiIvPjwvc3ZnPg==" alt="NodeKraft Agency" />
+  <img src="https://img.shields.io/badge/NodeKraft_Agency-0A101F?style=for-the-badge&labelColor=0A101F&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0E3OEJGQSIgZD0iTTIgNGgzbDYgOS41VjRoM3YxNmgtM0w1IDEwLjVWMjBIMnoiLz48cGF0aCBmaWxsPSIjMjJEM0VFIiBkPSJNMjIuNSA0aC0zLjZMMTQuOCAxMmw0LjEgOGgzLjZsLTQuMS04eiIvPjwvc3ZnPg==" alt="NodeKraft Agency" />
 </a>
 &nbsp;&nbsp;
 <a href="https://tryhackme.com/p/BlackPantherX">

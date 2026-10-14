@@ -62,7 +62,7 @@ THEMES = {
         "CYAN": "#22D3EE", "VIOLET": "#A78BFA", "VIOLET2": "#7C3AED", "EMERALD": "#10B981",
         "TEXT": "#F8FAFC", "MUTED": "#94A3B8", "DIM": "#475569",
         "LEADER": "rgba(148,163,184,0.35)", "PILL_BG": "#4C1D95", "PILL_TX": "#E9D5FF",
-        "RED": "#F87171", "LOGO_A": "#E2E8F0", "LOGO_B": "#F7931E",
+        "RED": "#F87171", "LOGO_A": "#A78BFA", "LOGO_B": "#22D3EE",
     },
     "light": {
         "FRAME": "#E2E8F0", "BG0": "#F8FAFC", "BG1": "#FFFFFF", "BAR": "#F1F5F9",
@@ -71,7 +71,7 @@ THEMES = {
         "CYAN": "#0891B2", "VIOLET": "#7C3AED", "VIOLET2": "#7C3AED", "EMERALD": "#059669",
         "TEXT": "#0F172A", "MUTED": "#475569", "DIM": "#94A3B8",
         "LEADER": "rgba(71,85,105,0.35)", "PILL_BG": "#EDE9FE", "PILL_TX": "#5B21B6",
-        "RED": "#DC2626", "LOGO_A": "#1E293B", "LOGO_B": "#EA7C0C",
+        "RED": "#DC2626", "LOGO_A": "#7C3AED", "LOGO_B": "#0891B2",
     },
 }
 
