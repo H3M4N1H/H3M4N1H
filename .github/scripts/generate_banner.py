@@ -4,7 +4,8 @@ Generate the animated, theme-aware profile banner (dark.svg + light.svg).
 
 Left:  TARGET.SCAN - a dithered pixel portrait built from assets/portrait.jpeg.
        Pixels fade in, a scanline sweeps the panel, then on a loop the portrait
-       dissolves into particles that spell the handle and reassemble.
+       dissolves into particles that spell the handle, fly together into the
+       NodeKraft logo (assets/nodekraft.png), and reassemble into the portrait.
 Right: SYSTEM.INFO - neofetch-style profile readout with dotted leaders.
 
 Edit PROFILE / INFO / CONTACT below, then run locally:
@@ -19,6 +20,8 @@ from PIL import Image, ImageOps
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 PORTRAIT = os.path.join(ROOT, "assets", "portrait.jpeg")
+LOGO = os.path.join(ROOT, "assets", "nodekraft.png")
+LOGO_SIZE = 150  # grid cells
 # crop box on the source photo (left, top, right) - height follows the panel aspect
 CROP = (40, 140, 1010)
 
@@ -44,7 +47,7 @@ INFO = [
 ]
 CONTACT = [
     ("Grid.Mail", "krishnahemanth100@gmail.com"),
-    ("Grid.Portfolio", "nodekraft.tech"),
+    ("Grid.Agency", "NodeKraft - nodekraft.tech"),
     ("Grid.LinkedIn", "p-hemanth-gupta-657b05353"),
     ("Grid.GitHub", "@H3M4N1H"),
     ("Grid.TryHackMe", "BlackPantherX"),
@@ -59,7 +62,7 @@ THEMES = {
         "CYAN": "#22D3EE", "VIOLET": "#A78BFA", "VIOLET2": "#7C3AED", "EMERALD": "#10B981",
         "TEXT": "#F8FAFC", "MUTED": "#94A3B8", "DIM": "#475569",
         "LEADER": "rgba(148,163,184,0.35)", "PILL_BG": "#4C1D95", "PILL_TX": "#E9D5FF",
-        "RED": "#F87171",
+        "RED": "#F87171", "LOGO_A": "#E2E8F0", "LOGO_B": "#F7931E",
     },
     "light": {
         "FRAME": "#E2E8F0", "BG0": "#F8FAFC", "BG1": "#FFFFFF", "BAR": "#F1F5F9",
@@ -68,7 +71,7 @@ THEMES = {
         "CYAN": "#0891B2", "VIOLET": "#7C3AED", "VIOLET2": "#7C3AED", "EMERALD": "#059669",
         "TEXT": "#0F172A", "MUTED": "#475569", "DIM": "#94A3B8",
         "LEADER": "rgba(71,85,105,0.35)", "PILL_BG": "#EDE9FE", "PILL_TX": "#5B21B6",
-        "RED": "#DC2626",
+        "RED": "#DC2626", "LOGO_A": "#1E293B", "LOGO_B": "#EA7C0C",
     },
 }
 
@@ -79,7 +82,7 @@ PX, PY, PW, PH = 36, 84, 400, 532          # portrait panel
 GW, GH, GS = 186, 262, 2                   # portrait grid (cells) and cell scale
 GX, GY = PX + (PW - GW * GS) // 2, PY + 4  # portrait origin
 REVEAL_END = 3.2                           # seconds until the portrait is complete
-CYCLE = 14.0                               # dissolve/reassemble loop length
+CYCLE = 20.0                               # portrait -> handle -> logo -> portrait loop
 
 # 5x7 pixel font for the particle text
 GLYPHS = {
@@ -139,6 +142,32 @@ def portrait_bits(theme):
     return np.asarray(Image.fromarray(g.astype(np.uint8)).convert("1"))
 
 
+def logo_bits():
+    """NodeKraft logo as two pixel layers: the navy strokes and the orange accents."""
+    im = Image.open(LOGO).convert("RGBA").resize((LOGO_SIZE, LOGO_SIZE), Image.BOX)
+    r, g, b, al = (np.asarray(im).astype(int)[..., i] for i in range(4))
+    accent = (al > 110) & (r - b > 70) & (r > 170)
+    primary = (al > 110) & ((r + g + b) / 3 < 185) & ~accent
+    pad = np.zeros((GH, GW), bool)
+    ox, oy = (GW - LOGO_SIZE) // 2, (GH - LOGO_SIZE) // 2
+    out = []
+    for layer in (primary, accent):
+        full = pad.copy()
+        full[oy:oy + LOGO_SIZE, ox:ox + LOGO_SIZE] = layer
+        out.append(full)
+    return out
+
+
+def anim(attr, frames, extra=""):
+    """SMIL values/keyTimes from [(time fraction, value), ...] on the shared loop."""
+    kt = ";".join(f"{t:.3f}" for t, _ in frames)
+    vals = ";".join(str(v) for _, v in frames)
+    tag = "animateTransform" if attr == "translate" else "animate"
+    kind = 'attributeName="transform" type="translate"' if attr == "translate" else f'attributeName="{attr}"'
+    return (f'<{tag} {kind} values="{vals}" keyTimes="{kt}" dur="{CYCLE}s" begin="{REVEAL_END}s" '
+            f'repeatCount="indefinite"{extra}/>')
+
+
 def rle_path(bits):
     out = []
     for y in range(bits.shape[0]):
@@ -186,29 +215,36 @@ def portrait_layer(theme, t):
           f'<path d="{rle_path(bits & (assign == b))}"/></g>')
     a('</g>')
 
-    # 2) settled portrait that fades out while particles form the handle, then returns
-    kt = "0;0.34;0.35;0.45;0.85;0.95;0.96;1"
+    # loop: portrait -> particles spell the handle -> particles fly into the logo -> portrait
     a(f'<g {tf} fill="{t["PIXEL"]}" shape-rendering="crispEdges" opacity="0">'
       f'<set attributeName="opacity" to="1" begin="{REVEAL_END}s"/>'
-      f'<g><animate attributeName="opacity" values="1;1;1;0;0;1;1;1" keyTimes="{kt}" dur="{CYCLE}s" '
-      f'begin="{REVEAL_END}s" repeatCount="indefinite"/><path d="{rle_path(bits)}"/></g></g>')
+      f'<g>{anim("opacity", [(0, 1), (0.22, 1), (0.28, 0), (0.86, 0), (0.92, 1), (1, 1)])}'
+      f'<path d="{rle_path(bits)}"/></g></g>')
 
-    # 3) particles: each starts on a lit portrait pixel and flies to a text dot
+    primary, accent = logo_bits()
+    a(f'<g {tf} shape-rendering="crispEdges" opacity="0">'
+      f'{anim("opacity", [(0, 0), (0.52, 0), (0.57, 1), (0.80, 1), (0.84, 0), (1, 0)])}'
+      f'<path fill="{t["LOGO_A"]}" d="{rle_path(primary)}"/><path fill="{t["LOGO_B"]}" d="{rle_path(accent)}"/></g>')
+
     big_w = len(HANDLE) * 24 - 4
     small_w = len(SUBLINE) * 12 - 2
     dots = text_dots(HANDLE, 4, (GW - big_w) // 2, 96) + text_dots(SUBLINE, 2, (GW - small_w) // 2, 136)
     lit = list(zip(*np.nonzero(bits)))
+    logo_lit = list(zip(*np.nonzero(primary | accent)))
+    move = ' calcMode="spline" keySplines="{}"'
     a(f'<g {tf} fill="{t["PIXEL"]}" shape-rendering="crispEdges">')
     for tx, ty, sc in dots:
         sy, sx = lit[rnd.randrange(len(lit))]
+        ly, lx = logo_lit[rnd.randrange(len(logo_lit))]
         size = sc - (0.6 if sc > 2 else 0.4)
+        S, T, L = f"{sx} {sy}", f"{tx} {ty}", f"{lx} {ly}"
+        frames = [(0, S), (0.21, S), (0.22, S), (0.30, T), (0.47, T), (0.55, L), (0.58, L),
+                  (0.80, L), (0.81, L), (0.89, S), (0.90, S), (1, S)]
+        ease = ";".join(".5 0 .2 1" if a_ != b_ else "0 0 1 1"
+                        for (_, a_), (_, b_) in zip(frames, frames[1:]))
         a(f'<rect width="{size}" height="{size}" opacity="0">'
-          f'<animate attributeName="opacity" values="0;0;1;1;1;1;0;0" keyTimes="{kt}" dur="{CYCLE}s" '
-          f'begin="{REVEAL_END}s" repeatCount="indefinite"/>'
-          f'<animateTransform attributeName="transform" type="translate" '
-          f'values="{sx} {sy};{sx} {sy};{sx} {sy};{tx} {ty};{tx} {ty};{sx} {sy};{sx} {sy};{sx} {sy}" '
-          f'keyTimes="{kt}" dur="{CYCLE}s" begin="{REVEAL_END}s" repeatCount="indefinite" '
-          f'calcMode="spline" keySplines="0 0 1 1;0 0 1 1;.5 0 .2 1;0 0 1 1;.5 0 .2 1;0 0 1 1;0 0 1 1"/></rect>')
+          f'{anim("opacity", [(0, 0), (0.21, 0), (0.22, 1), (0.57, 1), (0.585, 0), (0.80, 0), (0.81, 1), (0.89, 1), (0.90, 0), (1, 0)])}'
+          f'{anim("translate", frames, move.format(ease))}</rect>')
     a('</g>')
     return "".join(s)
 
