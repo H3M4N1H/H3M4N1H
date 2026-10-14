@@ -23,6 +23,26 @@
 
 I'm Hemanth, a cybersecurity enthusiast and developer interested in offensive security, CTFs, AI-assisted tooling, and useful developer experiences. I enjoy taking ideas from prototype to working projects.
 
+## Terminal portrait
+
+<p align="center">
+<pre>
+┌───────────────────────────────────────────────┐
+│  hemanth@github:~$ ./identify.sh               │
+│                                               │
+│       ██╗  ██╗██████╗ ███╗   ██╗              │
+│       ██║  ██║╚════██╗████╗  ██║              │
+│       ███████║ █████╔╝██╔██╗ ██║              │
+│       ██╔══██║ ╚═══██╗██║╚██╗██║              │
+│       ██║  ██║██████╔╝██║ ╚████║              │
+│       ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═══╝              │
+│                                               │
+│  [ offensive security ] [ CTFs ] [ builder ]  │
+│  status: learning • shipping • repeating      │
+└───────────────────────────────────────────────┘
+</pre>
+</p>
+
 ## Featured projects
 
 | Project | What it does |
@@ -40,20 +60,34 @@ I'm Hemanth, a cybersecurity enthusiast and developer interested in offensive se
 
 `Python` `Linux` `Networking` `Web Security` `Flask` `React` `Next.js` `TypeScript` `Docker` `AI/ML` `CTF tooling`
 
-## GitHub activity
+## Daily contribution grid
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=H3M4N1H&hide_border=true&background=0A101F&stroke=22D3EE&ring=A78BFA&fire=10B981&currStreakLabel=22D3EE&sideLabels=94A3B8&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=64748B" alt="GitHub streak" width="100%">
+  <a href="https://github.com/H3M4N1H">
+    <img src="https://github-readme-activity-graph.vercel.app/graph?username=H3M4N1H&bg_color=0a101f&color=22d3ee&line=a78bfa&point=34d399&area=true&hide_border=true&custom_title=DAILY%20CONTRIBUTION%20ACTIVITY" alt="Daily GitHub contribution activity graph" width="100%">
+  </a>
 </p>
 
-## Contribution snake
+## Contribution snake game
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/output/github-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/output/github-snake.svg">
-    <img alt="Snake animation of GitHub contributions" src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/output/github-snake.svg" width="100%">
-  </picture>
+  <table>
+    <tr>
+      <td align="center">
+        <b>🐍 EAT THE CONTRIBUTIONS</b><br>
+        <sub>The snake follows your GitHub contribution grid.</sub><br><br>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/output/github-snake-dark.svg">
+          <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/output/github-snake.svg">
+          <img alt="Animated snake game generated from GitHub contributions" src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/output/github-snake.svg" width="100%">
+        </picture>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=H3M4N1H&hide_border=true&background=0A101F&stroke=22D3EE&ring=A78BFA&fire=10B981&currStreakLabel=22D3EE&sideLabels=94A3B8&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=64748B" alt="GitHub contribution streak" width="100%">
 </p>
 
 ## Connect
