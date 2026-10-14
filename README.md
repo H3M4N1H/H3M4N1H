@@ -74,7 +74,7 @@
   <img src="https://img.shields.io/badge/CTFtime-0A101F?style=for-the-badge&labelColor=0A101F&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik01IDJoMnYyMEg1ek04IDNoMTFsLTMgNC41TDE5IDEySDh6Ii8+PC9zdmc+Cg==" alt="CTFtime" />
 </a>
 &nbsp;&nbsp;
-<a href="mailto:krishnahemanth100@gmail.com">
+<a href="mailto:phemanthgupta@nodekraft.tech">
   <img src="https://img.shields.io/badge/Email-0A101F?style=for-the-badge&logo=gmail&logoColor=10B981&labelColor=0A101F" alt="Email" />
 </a>
 

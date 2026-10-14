@@ -4,8 +4,8 @@ Generate the animated, theme-aware profile banner (dark.svg + light.svg).
 
 Left:  TARGET.SCAN - a dithered pixel portrait built from assets/portrait.jpeg.
        Pixels fade in, a scanline sweeps the panel, then on a loop the portrait
-       dissolves into particles that spell the handle, fly together into the
-       NodeKraft logo (assets/nodekraft.png), and reassemble into the portrait.
+       dissolves into particles that spell the handle above the NodeKraft logo
+       (assets/nodekraft.png), then reassembles into the portrait.
 Right: SYSTEM.INFO - neofetch-style profile readout with dotted leaders.
 
 Edit PROFILE / INFO / CONTACT below, then run locally:
@@ -21,7 +21,8 @@ from PIL import Image, ImageOps
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 PORTRAIT = os.path.join(ROOT, "assets", "portrait.jpeg")
 LOGO = os.path.join(ROOT, "assets", "nodekraft.png")
-LOGO_SIZE = 150  # grid cells
+LOGO_SIZE = 124  # grid cells
+LOGO_TOP = 104   # grid row where the logo starts, below the handle text
 # crop box on the source photo (left, top, right) - height follows the panel aspect
 CROP = (40, 140, 1010)
 
@@ -46,7 +47,7 @@ INFO = [
     ("AI.Stack", "Gemini API, Ollama, scikit-learn"),
 ]
 CONTACT = [
-    ("Grid.Mail", "krishnahemanth100@gmail.com"),
+    ("Grid.Mail", "phemanthgupta@nodekraft.tech"),
     ("Grid.Agency", "NodeKraft - nodekraft.tech"),
     ("Grid.LinkedIn", "p-hemanth-gupta-657b05353"),
     ("Grid.GitHub", "@H3M4N1H"),
@@ -82,7 +83,7 @@ PX, PY, PW, PH = 36, 84, 400, 532          # portrait panel
 GW, GH, GS = 186, 262, 2                   # portrait grid (cells) and cell scale
 GX, GY = PX + (PW - GW * GS) // 2, PY + 4  # portrait origin
 REVEAL_END = 3.2                           # seconds until the portrait is complete
-CYCLE = 20.0                               # portrait -> handle -> logo -> portrait loop
+CYCLE = 16.0                               # portrait -> handle + logo -> portrait loop
 
 # 5x7 pixel font for the particle text
 GLYPHS = {
@@ -149,7 +150,7 @@ def logo_bits():
     accent = (al > 110) & (r - b > 70) & (r > 170)
     primary = (al > 110) & ((r + g + b) / 3 < 185) & ~accent
     pad = np.zeros((GH, GW), bool)
-    ox, oy = (GW - LOGO_SIZE) // 2, (GH - LOGO_SIZE) // 2
+    ox, oy = (GW - LOGO_SIZE) // 2, LOGO_TOP
     out = []
     for layer in (primary, accent):
         full = pad.copy()
@@ -215,36 +216,39 @@ def portrait_layer(theme, t):
           f'<path d="{rle_path(bits & (assign == b))}"/></g>')
     a('</g>')
 
-    # loop: portrait -> particles spell the handle -> particles fly into the logo -> portrait
+    # loop: portrait -> particles spell the handle while more fly into the logo below -> portrait
     a(f'<g {tf} fill="{t["PIXEL"]}" shape-rendering="crispEdges" opacity="0">'
       f'<set attributeName="opacity" to="1" begin="{REVEAL_END}s"/>'
-      f'<g>{anim("opacity", [(0, 1), (0.22, 1), (0.28, 0), (0.86, 0), (0.92, 1), (1, 1)])}'
+      f'<g>{anim("opacity", [(0, 1), (0.30, 1), (0.37, 0), (0.86, 0), (0.93, 1), (1, 1)])}'
       f'<path d="{rle_path(bits)}"/></g></g>')
 
     primary, accent = logo_bits()
     a(f'<g {tf} shape-rendering="crispEdges" opacity="0">'
-      f'{anim("opacity", [(0, 0), (0.52, 0), (0.57, 1), (0.80, 1), (0.84, 0), (1, 0)])}'
+      f'{anim("opacity", [(0, 0), (0.37, 0), (0.41, 1), (0.83, 1), (0.86, 0), (1, 0)])}'
       f'<path fill="{t["LOGO_A"]}" d="{rle_path(primary)}"/><path fill="{t["LOGO_B"]}" d="{rle_path(accent)}"/></g>')
 
     big_w = len(HANDLE) * 24 - 4
     small_w = len(SUBLINE) * 12 - 2
-    dots = text_dots(HANDLE, 4, (GW - big_w) // 2, 96) + text_dots(SUBLINE, 2, (GW - small_w) // 2, 136)
+    dots = text_dots(HANDLE, 4, (GW - big_w) // 2, 36) + text_dots(SUBLINE, 2, (GW - small_w) // 2, 76)
     lit = list(zip(*np.nonzero(bits)))
     logo_lit = list(zip(*np.nonzero(primary | accent)))
+    targets = [(tx, ty, sc, True) for tx, ty, sc in dots]
+    targets += [(lx, ly, 2, False) for ly, lx in (logo_lit[rnd.randrange(len(logo_lit))] for _ in range(160))]
+
     move = ' calcMode="spline" keySplines="{}"'
     a(f'<g {tf} fill="{t["PIXEL"]}" shape-rendering="crispEdges">')
-    for tx, ty, sc in dots:
+    for tx, ty, sc, stays in targets:
         sy, sx = lit[rnd.randrange(len(lit))]
-        ly, lx = logo_lit[rnd.randrange(len(logo_lit))]
         size = sc - (0.6 if sc > 2 else 0.4)
-        S, T, L = f"{sx} {sy}", f"{tx} {ty}", f"{lx} {ly}"
-        frames = [(0, S), (0.21, S), (0.22, S), (0.30, T), (0.47, T), (0.55, L), (0.58, L),
-                  (0.80, L), (0.81, L), (0.89, S), (0.90, S), (1, S)]
-        ease = ";".join(".5 0 .2 1" if a_ != b_ else "0 0 1 1"
-                        for (_, a_), (_, b_) in zip(frames, frames[1:]))
+        S, T = f"{sx} {sy}", f"{tx} {ty}"
+        frames = [(0, S), (0.30, S), (0.38, T), (0.85, T), (0.93, S), (1, S)]
+        ease = ";".join(".5 0 .2 1" if a_ != b_ else "0 0 1 1" for (_, a_), (_, b_) in zip(frames, frames[1:]))
+        if stays:   # handle text: visible for the whole stage
+            fade = [(0, 0), (0.29, 0), (0.30, 1), (0.93, 1), (0.94, 0), (1, 0)]
+        else:       # logo particles: hand over to the crisp logo, then carry it back out
+            fade = [(0, 0), (0.29, 0), (0.30, 1), (0.39, 1), (0.42, 0), (0.83, 0), (0.85, 1), (0.93, 1), (0.94, 0), (1, 0)]
         a(f'<rect width="{size}" height="{size}" opacity="0">'
-          f'{anim("opacity", [(0, 0), (0.21, 0), (0.22, 1), (0.57, 1), (0.585, 0), (0.80, 0), (0.81, 1), (0.89, 1), (0.90, 0), (1, 0)])}'
-          f'{anim("translate", frames, move.format(ease))}</rect>')
+          f'{anim("opacity", fade)}{anim("translate", frames, move.format(ease))}</rect>')
     a('</g>')
     return "".join(s)
 
