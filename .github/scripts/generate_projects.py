@@ -23,6 +23,7 @@ THEMES = {
         "STROKE_LO": "rgba(34,211,238,0.22)", "BARLINE": "rgba(255,255,255,0.08)",
         "RING_BG": "rgba(148,163,184,0.15)", "PILL_BG": "rgba(124,58,237,0.28)",
         "PILL_STROKE": "rgba(167,139,250,0.5)", "MONO_TX": "#EDE9FE",
+        "TILE_BG": "rgba(34,211,238,0.10)",
     },
     "light": {
         "BG": "#F8FAFC", "PANEL": "#FFFFFF", "PANEL_BAR": "#F1F5F9",
@@ -33,12 +34,13 @@ THEMES = {
         "STROKE_LO": "rgba(8,145,178,0.20)", "BARLINE": "rgba(0,0,0,0.08)",
         "RING_BG": "rgba(100,116,139,0.20)", "PILL_BG": "rgba(124,58,237,0.12)",
         "PILL_STROKE": "rgba(124,58,237,0.4)", "MONO_TX": "#FFFFFF",
+        "TILE_BG": "rgba(8,145,178,0.08)",
     },
 }
 
 # active palette — set by set_theme(); defaults to dark
 BG = PANEL = PANEL_BAR = CYAN = VIOLET = VIOLET2 = EMERALD = TEXT = MUTED = DIM = None
-STROKE = STROKE_HI = STROKE_LO = BARLINE = RING_BG = PILL_BG = PILL_STROKE = MONO_TX = None
+STROKE = STROKE_HI = STROKE_LO = BARLINE = RING_BG = PILL_BG = PILL_STROKE = MONO_TX = TILE_BG = None
 DONUT_COLORS = []
 
 def set_theme(name):
@@ -86,7 +88,7 @@ def load_logo_b64(path):
                 return f"data:{mime};base64," + base64.b64encode(f.read()).decode()
     return None
 
-# built-in project icons: 24x24 stroke paths, drawn in the theme violet on a plain tile.
+# built-in project icons: 24x24 stroke paths, drawn in the theme cyan on a plain tile.
 # pick one per project with "icon" in projects.json
 ICONS = {
     "shield-pulse": '<path d="M12 2.5 4.5 5.5v6c0 4.6 3.2 8.3 7.5 10 4.3-1.7 7.5-5.4 7.5-10v-6z"/>'
@@ -108,9 +110,9 @@ ICONS = {
 
 def icon_tile(icon, float_anim):
     return (f'<g>{float_anim}'
-            f'<rect x="16.5" y="44.5" width="39" height="39" rx="9.5" fill="{PILL_BG}" stroke="{PILL_STROKE}"/>'
-            f'<g transform="translate(24,52)" fill="none" stroke="{VIOLET}" stroke-width="1.9" '
-            f'stroke-linecap="round" stroke-linejoin="round">{ICONS[icon].replace("#fff", VIOLET)}</g></g>')
+            f'<rect x="16.5" y="44.5" width="39" height="39" rx="9.5" fill="{TILE_BG}" stroke="{STROKE_HI}"/>'
+            f'<g transform="translate(24,52)" fill="none" stroke="{CYAN}" stroke-width="1.9" '
+            f'stroke-linecap="round" stroke-linejoin="round">{ICONS[icon].replace("#fff", CYAN)}</g></g>')
 
 def wrap_text(s, max_chars, max_lines=2):
     words = s.split()
