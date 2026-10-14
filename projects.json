@@ -1,0 +1,44 @@
+[
+  {
+    "name": "ThrustGuard",
+    "repo": "H3M4N1H/ThrustGuard-GUI",
+    "description": "Local IoT behavioral trust scoring and anomaly detection engine",
+    "tags": ["Python", "FastAPI", "IoT Security"]
+  },
+  {
+    "name": "SpecterNet",
+    "repo": "H3M4N1H/SpecterNet",
+    "description": "Network sniffer and analysis suite with live capture and credential detection",
+    "tags": ["Python", "PyQt6", "Networking"]
+  },
+  {
+    "name": "Aegis",
+    "repo": "H3M4N1H/Aegis",
+    "description": "Evidence-first SOC and deception lab built on Cowrie honeypot telemetry",
+    "tags": ["Blue Team", "Docker", "Python"]
+  },
+  {
+    "name": "CipherX",
+    "repo": "H3M4N1H/CipherX",
+    "description": "Multi-layer CTF cipher and encoding auto-cracker for the terminal",
+    "tags": ["CTF", "Crypto", "Python"]
+  },
+  {
+    "name": "SafeKey",
+    "repo": "H3M4N1H/SafeKey",
+    "description": "Local-first password manager with AES-256-GCM, Argon2id and zero telemetry",
+    "tags": ["JavaScript", "Web Crypto", "Privacy"]
+  },
+  {
+    "name": "Snipe",
+    "repo": "H3M4N1H/snipe",
+    "description": "Telegram bot that alerts you to hackathons, internships, CTFs and more",
+    "tags": ["Python", "Telegram", "LLM"]
+  },
+  {
+    "name": "Ranq",
+    "repo": "H3M4N1H/ranq",
+    "description": "Open-source CLI that audits websites for SEO, AEO and AI search (GEO)",
+    "tags": ["Python", "SEO", "Open Source"]
+  }
+]
