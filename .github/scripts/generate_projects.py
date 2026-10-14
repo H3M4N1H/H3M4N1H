@@ -46,6 +46,7 @@ def set_theme(name):
     g = globals()
     for k, v in t.items():
         g[k] = v
+    g["THEME"] = name
     g["DONUT_COLORS"] = [t["VIOLET"], t["CYAN"], t["EMERALD"], "#6366F1", "#64748B", "#94A3B8"]
 
 set_theme("dark")
@@ -85,6 +86,37 @@ def load_logo_b64(path):
             with open(p, "rb") as f:
                 return f"data:{mime};base64," + base64.b64encode(f.read()).decode()
     return None
+
+# built-in project icons: 24x24 stroke paths, drawn white on a gradient tile.
+# pick one per project with "icon" in projects.json, tint it with "colors": [from, to]
+ICONS = {
+    "shield-pulse": '<path d="M12 2.5 4.5 5.5v6c0 4.6 3.2 8.3 7.5 10 4.3-1.7 7.5-5.4 7.5-10v-6z"/>'
+                    '<path d="M7.5 12.5h2.5l1.5-3.5 2 6.5 1.5-3h1.5"/>',
+    "ghost":        '<path d="M5 21V11a7 7 0 0 1 14 0v10l-2.33-2-2.34 2L12 19l-2.33 2-2.34-2z"/>'
+                    '<circle cx="9.5" cy="11" r="1.1" fill="#fff"/><circle cx="14.5" cy="11" r="1.1" fill="#fff"/>',
+    "hex-eye":      '<path d="M12 2.5 20.5 7.25v9.5L12 21.5 3.5 16.75v-9.5z"/>'
+                    '<path d="M7.5 12s1.8-3 4.5-3 4.5 3 4.5 3-1.8 3-4.5 3-4.5-3-4.5-3z"/>'
+                    '<circle cx="12" cy="12" r="1.1" fill="#fff"/>',
+    "unlock":       '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.8-1.2"/>'
+                    '<path d="M12 15v2"/>',
+    "key":          '<circle cx="8" cy="15.5" r="4"/><path d="M10.9 12.6 19.5 4"/><path d="m15.5 8 2.5 2.5"/>'
+                    '<path d="m17.5 6 2 2"/>',
+    "crosshair":    '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/>'
+                    '<path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>',
+    "rank-bars":    '<path d="M3.5 21h17"/><path d="M6.5 21v-5M12 21v-9M17.5 21V6"/>'
+                    '<path d="M5 4.5v4M3 6.5h4"/>',
+}
+
+def icon_tile(icon, colors, gid, float_anim):
+    c1, c2 = colors
+    return (f'<g>{float_anim}'
+            f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="1" y2="1">'
+            f'<stop offset="0" stop-color="{c1}"/><stop offset="1" stop-color="{c2}"/></linearGradient></defs>'
+            f'<rect x="14" y="46" width="44" height="40" rx="10" fill="url(#{gid})" opacity="0.45" filter="url(#tileGlow_{THEME})"/>'
+            f'<rect x="16" y="44" width="40" height="40" rx="10" fill="url(#{gid})"/>'
+            f'<rect x="16.5" y="44.5" width="39" height="39" rx="9.5" fill="none" stroke="#fff" stroke-opacity="0.25"/>'
+            f'<g transform="translate(24,52)" fill="none" stroke="#fff" stroke-width="1.9" '
+            f'stroke-linecap="round" stroke-linejoin="round">{ICONS[icon]}</g></g>')
 
 def wrap_text(s, max_chars, max_lines=2):
     words = s.split()
@@ -169,7 +201,9 @@ def card(p, x, y, idx):
                   f'values="0 0; 0 -2.5; 0 0" dur="5s" begin="{b+idx*0.5:.2f}s" '
                   f'repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" '
                   f'keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>')
-    if logo:
+    if p.get("icon") in ICONS:
+        a(icon_tile(p["icon"], p.get("colors") or (VIOLET2, CYAN), f"tile_{THEME}_{idx}", float_anim))
+    elif logo:
         a(f'<g>{float_anim}<image x="16" y="44" width="40" height="40" href="{logo}" preserveAspectRatio="xMidYMid meet"/></g>')
     else:
         initial = esc((p.get("name") or "?")[0].upper())
@@ -234,7 +268,9 @@ def build(projects, theme="dark"):
     a(f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="1" y2="0">'
       f'<stop offset="0" stop-color="{VIOLET2}"><animate attributeName="stop-color" values="{VIOLET2};{CYAN};{EMERALD};{VIOLET2}" dur="10s" repeatCount="indefinite"/></stop>'
       f'<stop offset="1" stop-color="{EMERALD}"><animate attributeName="stop-color" values="{EMERALD};{VIOLET2};{CYAN};{EMERALD}" dur="10s" repeatCount="indefinite"/></stop>'
-      '</linearGradient></defs>')
+      '</linearGradient>'
+      f'<filter id="tileGlow_{theme}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>'
+      '</defs>')
     # header: matches SYSTEM.INFO styling
     a(f'<text x="{MARGIN+2}" y="18" font-size="11" letter-spacing="2" fill="{CYAN}">PROJECTS.LIST</text>')
     a(f'<text x="{MARGIN+130}" y="18" font-size="10" fill="{DIM}">./projects.sh --all</text>')
