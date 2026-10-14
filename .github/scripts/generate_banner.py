@@ -3,7 +3,7 @@
 Generate the animated, theme-aware profile banner (dark.svg + light.svg).
 
 Left:  TARGET.SCAN - a dithered pixel portrait built from assets/portrait.jpeg.
-       Pixels fade in, a scanline sweeps the panel, then on a loop the portrait
+       Pixels fade in, then on a loop the portrait
        dissolves into particles that spell the handle above the NodeKraft logo
        (assets/nodekraft.png), then reassembles into the portrait.
 Right: SYSTEM.INFO - neofetch-style profile readout with dotted leaders.
@@ -11,8 +11,13 @@ Right: SYSTEM.INFO - neofetch-style profile readout with dotted leaders.
 Edit PROFILE / INFO / CONTACT below, then run locally:
     pip install pillow numpy
     python3 .github/scripts/generate_banner.py
+
+A portrait with a transparent background (RGBA PNG cutout) uses its alpha as
+the mask; otherwise a plain light backdrop is flood-filled away. Try another
+photo without touching the repo files:
+    python3 .github/scripts/generate_banner.py --portrait me.png --crop 280,340,1160 --out-dir /tmp/preview
 """
-import html, os, random
+import argparse, html, os, random
 from collections import deque
 
 import numpy as np
@@ -111,10 +116,15 @@ def esc(s):
 # ---------------- portrait ----------------
 def portrait_bits(theme):
     """1-bit dithered portrait on a GW x GH grid. Background is flood-filled away."""
-    im = Image.open(PORTRAIT).convert("RGB")
+    src = Image.open(PORTRAIT)
     x0, y0, x1 = CROP
     box = (x0, y0, x1, int(y0 + (x1 - x0) * GH / GW))
-    c = im.crop(box).resize((GW, GH), Image.LANCZOS)
+    if "A" in src.getbands():
+        cut = src.convert("RGBA").crop(box).resize((GW, GH), Image.LANCZOS)
+        fg = np.asarray(cut)[..., 3] > 128
+        c = cut.convert("RGB")
+        return dither(c, fg, theme)
+    c = src.convert("RGB").crop(box).resize((GW, GH), Image.LANCZOS)
 
     rgb = np.asarray(c).astype(float)
     sat = np.asarray(c.convert("HSV"))[..., 1].astype(float)
@@ -134,7 +144,10 @@ def portrait_bits(theme):
         xs = np.nonzero(fg[y])[0]
         if len(xs):
             fg[y, xs[0]:xs[-1] + 1] = True
+    return dither(c, fg, theme)
 
+
+def dither(c, fg, theme):
     g = np.asarray(ImageOps.autocontrast(c.convert("L"), cutoff=1)).astype(float)
     g = 255 * (g / 255) ** 0.85
     if theme == "light":
@@ -319,14 +332,11 @@ def build(theme):
       f'<stop offset="1" stop-color="{t["EMERALD"]}"><animate attributeName="stop-color" values="{t["EMERALD"]};{t["VIOLET2"]};{t["CYAN"]};{t["EMERALD"]}" dur="10s" repeatCount="indefinite"/></stop>'
       '</linearGradient>'
       f'<linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{t["BG0"]}"/><stop offset="1" stop-color="{t["BG1"]}"/></linearGradient>'
-      f'<linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{t["CYAN"]}" stop-opacity="0"/>'
-      f'<stop offset="0.85" stop-color="{t["CYAN"]}" stop-opacity="0.16"/><stop offset="1" stop-color="{t["CYAN"]}" stop-opacity="0.55"/></linearGradient>'
       '<filter id="glow8" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>'
       '<filter id="glow3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>'
       '<filter id="txtGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="0.9" result="b"/>'
       '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
       f'<clipPath id="winClip"><rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="18"/></clipPath>'
-      f'<clipPath id="panelClip"><rect x="{PX}" y="{PY}" width="{PW}" height="{PH}" rx="10"/></clipPath>'
       '</defs>')
     a(f'<rect x="2" y="2" width="{W - 4}" height="{H - 4}" rx="18" fill="{t["FRAME"]}"/>')
     a('<g clip-path="url(#winClip)">')
@@ -342,8 +352,6 @@ def build(theme):
     a(f'<rect x="{PX}" y="{PY}" width="{PW}" height="{PH}" rx="10" fill="none" stroke="{t["CYAN"]}" stroke-width="2" opacity="0.45" filter="url(#glow3)"/>')
     a(f'<rect x="{PX}" y="{PY}" width="{PW}" height="{PH}" rx="10" fill="{t["PANEL"]}" stroke="{t["PANEL_STROKE"]}"/>')
     a(portrait_layer(theme, t))
-    a(f'<g clip-path="url(#panelClip)"><rect x="{PX}" y="{PY - 70}" width="{PW}" height="70" fill="url(#scan)">'
-      f'<animateTransform attributeName="transform" type="translate" values="0 0;0 {PH + 70}" dur="4.2s" repeatCount="indefinite"/></rect></g>')
     a(f'<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="{REVEAL_END}s" fill="freeze"/>'
       f'<rect x="{PX + 12}" y="{PY + PH - 30}" width="168" height="18" rx="4" fill="{t["PANEL"]}" opacity="0.85"/>'
       f'<text x="{PX + 20}" y="{PY + PH - 17}" font-size="10" letter-spacing="1.5" fill="{t["EMERALD"]}">'
@@ -360,9 +368,18 @@ def build(theme):
 
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--portrait", default=PORTRAIT)
+    ap.add_argument("--crop", default=",".join(map(str, CROP)), help="left,top,right on the source photo")
+    ap.add_argument("--out-dir", default=ROOT)
+    ap.add_argument("--prefix", default="")
+    args = ap.parse_args()
+    PORTRAIT = args.portrait
+    CROP = tuple(int(v) for v in args.crop.split(","))
+    os.makedirs(args.out_dir, exist_ok=True)
     for theme in ("dark", "light"):
         svg = build(theme)
-        path = os.path.join(ROOT, f"{theme}.svg")
+        path = os.path.join(args.out_dir, f"{args.prefix}{theme}.svg")
         with open(path, "w") as f:
             f.write(svg)
         print(f"wrote {path}: {len(svg) // 1024}KB")
