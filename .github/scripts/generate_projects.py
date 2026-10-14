@@ -46,7 +46,6 @@ def set_theme(name):
     g = globals()
     for k, v in t.items():
         g[k] = v
-    g["THEME"] = name
     g["DONUT_COLORS"] = [t["VIOLET"], t["CYAN"], t["EMERALD"], "#6366F1", "#64748B", "#94A3B8"]
 
 set_theme("dark")
@@ -87,8 +86,8 @@ def load_logo_b64(path):
                 return f"data:{mime};base64," + base64.b64encode(f.read()).decode()
     return None
 
-# built-in project icons: 24x24 stroke paths, drawn white on a gradient tile.
-# pick one per project with "icon" in projects.json, tint it with "colors": [from, to]
+# built-in project icons: 24x24 stroke paths, drawn in the theme violet on a plain tile.
+# pick one per project with "icon" in projects.json
 ICONS = {
     "shield-pulse": '<path d="M12 2.5 4.5 5.5v6c0 4.6 3.2 8.3 7.5 10 4.3-1.7 7.5-5.4 7.5-10v-6z"/>'
                     '<path d="M7.5 12.5h2.5l1.5-3.5 2 6.5 1.5-3h1.5"/>',
@@ -107,16 +106,11 @@ ICONS = {
                     '<path d="M5 4.5v4M3 6.5h4"/>',
 }
 
-def icon_tile(icon, colors, gid, float_anim):
-    c1, c2 = colors
+def icon_tile(icon, float_anim):
     return (f'<g>{float_anim}'
-            f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="1" y2="1">'
-            f'<stop offset="0" stop-color="{c1}"/><stop offset="1" stop-color="{c2}"/></linearGradient></defs>'
-            f'<rect x="14" y="46" width="44" height="40" rx="10" fill="url(#{gid})" opacity="0.45" filter="url(#tileGlow_{THEME})"/>'
-            f'<rect x="16" y="44" width="40" height="40" rx="10" fill="url(#{gid})"/>'
-            f'<rect x="16.5" y="44.5" width="39" height="39" rx="9.5" fill="none" stroke="#fff" stroke-opacity="0.25"/>'
-            f'<g transform="translate(24,52)" fill="none" stroke="#fff" stroke-width="1.9" '
-            f'stroke-linecap="round" stroke-linejoin="round">{ICONS[icon]}</g></g>')
+            f'<rect x="16.5" y="44.5" width="39" height="39" rx="9.5" fill="{PILL_BG}" stroke="{PILL_STROKE}"/>'
+            f'<g transform="translate(24,52)" fill="none" stroke="{VIOLET}" stroke-width="1.9" '
+            f'stroke-linecap="round" stroke-linejoin="round">{ICONS[icon].replace("#fff", VIOLET)}</g></g>')
 
 def wrap_text(s, max_chars, max_lines=2):
     words = s.split()
@@ -202,7 +196,7 @@ def card(p, x, y, idx):
                   f'repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" '
                   f'keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>')
     if p.get("icon") in ICONS:
-        a(icon_tile(p["icon"], p.get("colors") or (VIOLET2, CYAN), f"tile_{THEME}_{idx}", float_anim))
+        a(icon_tile(p["icon"], float_anim))
     elif logo:
         a(f'<g>{float_anim}<image x="16" y="44" width="40" height="40" href="{logo}" preserveAspectRatio="xMidYMid meet"/></g>')
     else:
@@ -269,7 +263,6 @@ def build(projects, theme="dark"):
       f'<stop offset="0" stop-color="{VIOLET2}"><animate attributeName="stop-color" values="{VIOLET2};{CYAN};{EMERALD};{VIOLET2}" dur="10s" repeatCount="indefinite"/></stop>'
       f'<stop offset="1" stop-color="{EMERALD}"><animate attributeName="stop-color" values="{EMERALD};{VIOLET2};{CYAN};{EMERALD}" dur="10s" repeatCount="indefinite"/></stop>'
       '</linearGradient>'
-      f'<filter id="tileGlow_{theme}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>'
       '</defs>')
     # header: matches SYSTEM.INFO styling
     a(f'<text x="{MARGIN+2}" y="18" font-size="11" letter-spacing="2" fill="{CYAN}">PROJECTS.LIST</text>')

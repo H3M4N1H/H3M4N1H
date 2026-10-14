@@ -1,9 +1,9 @@
 [
-  {"name": "ThrustGuard", "repo": "H3M4N1H/ThrustGuard-GUI", "icon": "shield-pulse", "colors": ["#7C3AED", "#22D3EE"], "description": "Local IoT behavioral trust scoring and anomaly detection engine", "tags": ["Python", "FastAPI", "IoT Security"]},
-  {"name": "SpecterNet", "repo": "H3M4N1H/SpecterNet", "icon": "ghost", "colors": ["#4F46E5", "#C084FC"], "description": "Network sniffer and analysis suite with live capture and credential detection", "tags": ["Python", "PyQt6", "Networking"]},
-  {"name": "Aegis", "repo": "H3M4N1H/Aegis", "icon": "hex-eye", "colors": ["#F59E0B", "#EF4444"], "description": "Evidence-first SOC and deception lab built on Cowrie honeypot telemetry", "tags": ["Blue Team", "Docker", "Python"]},
-  {"name": "CipherX", "repo": "H3M4N1H/CipherX", "icon": "unlock", "colors": ["#059669", "#22D3EE"], "description": "Multi-layer CTF cipher and encoding auto-cracker for the terminal", "tags": ["CTF", "Crypto", "Python"]},
-  {"name": "SafeKey", "repo": "H3M4N1H/SafeKey", "icon": "key", "colors": ["#0EA5E9", "#6366F1"], "description": "Local-first password manager with AES-256-GCM, Argon2id and zero telemetry", "tags": ["JavaScript", "Web Crypto", "Privacy"]},
-  {"name": "Snipe", "repo": "H3M4N1H/snipe", "icon": "crosshair", "colors": ["#E11D48", "#F472B6"], "description": "Telegram bot that alerts you to hackathons, internships, CTFs and more", "tags": ["Python", "Telegram", "LLM"]},
-  {"name": "Ranq", "repo": "H3M4N1H/ranq", "icon": "rank-bars", "colors": ["#0891B2", "#10B981"], "description": "Open-source CLI that audits websites for SEO, AEO and AI search (GEO)", "tags": ["Python", "SEO", "Open Source"]}
+  {"name": "ThrustGuard", "repo": "H3M4N1H/ThrustGuard-GUI", "icon": "shield-pulse", "description": "Local IoT behavioral trust scoring and anomaly detection engine", "tags": ["Python", "FastAPI", "IoT Security"]},
+  {"name": "SpecterNet", "repo": "H3M4N1H/SpecterNet", "icon": "ghost", "description": "Network sniffer and analysis suite with live capture and credential detection", "tags": ["Python", "PyQt6", "Networking"]},
+  {"name": "Aegis", "repo": "H3M4N1H/Aegis", "icon": "hex-eye", "description": "Evidence-first SOC and deception lab built on Cowrie honeypot telemetry", "tags": ["Blue Team", "Docker", "Python"]},
+  {"name": "CipherX", "repo": "H3M4N1H/CipherX", "icon": "unlock", "description": "Multi-layer CTF cipher and encoding auto-cracker for the terminal", "tags": ["CTF", "Crypto", "Python"]},
+  {"name": "SafeKey", "repo": "H3M4N1H/SafeKey", "icon": "key", "description": "Local-first password manager with AES-256-GCM, Argon2id and zero telemetry", "tags": ["JavaScript", "Web Crypto", "Privacy"]},
+  {"name": "Snipe", "repo": "H3M4N1H/snipe", "icon": "crosshair", "description": "Telegram bot that alerts you to hackathons, internships, CTFs and more", "tags": ["Python", "Telegram", "LLM"]},
+  {"name": "Ranq", "repo": "H3M4N1H/ranq", "icon": "rank-bars", "description": "Open-source CLI that audits websites for SEO, AEO and AI search (GEO)", "tags": ["Python", "SEO", "Open Source"]}
 ]
