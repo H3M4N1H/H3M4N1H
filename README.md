@@ -1,11 +1,4 @@
-<!-- ===== THEME-AWARE HERO BANNER ===== -->
-<!-- GitHub shows dark.svg in dark mode and light.svg in light mode. Regenerate with .github/scripts/generate_banner.py -->
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/main/dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/main/light.svg">
-  <img alt="P Hemanth Gupta - Cybersecurity Engineer in the Making" src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/main/light.svg">
-</picture>
+# P Hemanth Gupta
 
 <!-- ===== GITHUB STATS ===== -->
 
