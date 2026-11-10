@@ -4,9 +4,9 @@
 -->
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/main/assets/hero.svg" width="100%" alt="H3M4N1H — twilight mountain landscape banner" />
+  <img src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/main/assets/hero.svg" width="100%" alt="H3M4N1H - twilight mountain landscape banner" />
 
-  <h3>Cybersecurity enthusiast · CTF player · Developer</h3>
+  <h3>Cybersecurity enthusiast | CTF player | Developer</h3>
   <p><i>Learning how systems work, finding where they fail, and building things that make them better.</i></p>
 
   <a href="https://linkedin.com/in/p-hemanth-gupta-657b05353"><img src="https://img.shields.io/badge/LinkedIn-Connect-5965A8?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
@@ -22,11 +22,11 @@
 
 I'm **P. Hemanth Gupta**, a cybersecurity-focused developer.
 
-I spend my time exploring offensive security, solving CTF challenges, learning how software behaves under pressure, and building practical tools. I enjoy moving between security research and development — from understanding a vulnerability to writing code that helps investigate or prevent it.
+I spend my time exploring offensive security, solving CTF challenges, learning how software behaves under pressure, and building practical tools. I enjoy moving between security research and development - from understanding a vulnerability to writing code that helps investigate or prevent it.
 
 - 🎯 **Focus:** Web security, penetration-testing fundamentals, networking and CTFs
 - 🧪 **Building:** Security tools, automation and practical developer projects
-- 🏢 **Founder:** [NodeKraft](https://nodekraft.tech) — digital solutions and automation
+- 🏢 **Founder:** [NodeKraft](https://nodekraft.tech) - digital solutions and automation
 - 🎨 **Community:** Creator Head & Core Member at Cyventura; Designer at Cybercom
 - 📍 **Based in:** Chennai, India
 
@@ -74,12 +74,12 @@ I spend my time exploring offensive security, solving CTF challenges, learning h
 
 A few projects and experiments from my GitHub:
 
-- **[SafeKey](https://github.com/H3M4N1H/SafeKey)** — local-first password manager focused on privacy and secure credential storage.
-- **[CipherX](https://github.com/H3M4N1H/CipherX)** — terminal-based multi-layer cipher and encoding challenge solver.
-- **[SpecterNet](https://github.com/H3M4N1H/SpecterNet)** — network capture and analysis suite.
-- **[Aegis](https://github.com/H3M4N1H/Aegis)** — evidence-first SOC and deception-lab project.
-- **[ThrustGuard](https://github.com/H3M4N1H/ThrustGuard-GUI)** — IoT behavioral trust scoring and anomaly detection.
-- **[Snipe](https://github.com/H3M4N1H/snipe)** — alerts for hackathons, internships and CTF opportunities.
+- **[SafeKey](https://github.com/H3M4N1H/SafeKey)** - local-first password manager focused on privacy and secure credential storage.
+- **[CipherX](https://github.com/H3M4N1H/CipherX)** - terminal-based multi-layer cipher and encoding challenge solver.
+- **[SpecterNet](https://github.com/H3M4N1H/SpecterNet)** - network capture and analysis suite.
+- **[Aegis](https://github.com/H3M4N1H/Aegis)** - evidence-first SOC and deception-lab project.
+- **[ThrustGuard](https://github.com/H3M4N1H/ThrustGuard-GUI)** - IoT behavioral trust scoring and anomaly detection.
+- **[Snipe](https://github.com/H3M4N1H/snipe)** - alerts for hackathons, internships and CTF opportunities.
 
 <div align="center">
 
@@ -101,14 +101,8 @@ A few projects and experiments from my GitHub:
 
   <br/>
 
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=H3M4N1H&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&hide_rank=true&bg_color=0D1117&title_color=B69AE8&icon_color=E7A58B&text_color=C5CBD5" />
-    <img width="49%" src="https://github-readme-stats.vercel.app/api?username=H3M4N1H&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&hide_rank=true&bg_color=FFFFFF&title_color=6D55A8&icon_color=DB8A70&text_color=414957" alt="GitHub statistics" />
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=H3M4N1H&layout=compact&langs_count=8&hide_border=true&bg_color=0D1117&title_color=B69AE8&text_color=C5CBD5" />
-    <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=H3M4N1H&layout=compact&langs_count=8&hide_border=true&bg_color=FFFFFF&title_color=6D55A8&text_color=414957" alt="Most used languages" />
-  </picture>
+  <img width="49%" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=H3M4N1H&theme=github_dark" alt="GitHub statistics" />
+  <img width="49%" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=H3M4N1H&theme=github_dark" alt="Most used languages" />
 
 </div>
 
@@ -127,5 +121,5 @@ A few projects and experiments from my GitHub:
 <div align="center">
   <i>Curiosity over comfort. Consistency over shortcuts.</i>
   <br/>
-  <sub>Thanks for stopping by — feel free to explore my work or connect.</sub>
+  <sub>Thanks for stopping by - feel free to explore my work or connect.</sub>
 </div>
