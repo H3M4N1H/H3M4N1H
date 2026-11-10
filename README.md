@@ -89,13 +89,6 @@ A few projects and experiments from my GitHub:
 
 </div>
 
-## CTF & achievements
-
-- 🥉 **3rd Place — CryptClash CTF**, Techastra '26 (solo)
-- 🥉 **3rd Place — VIT CyberQuest CTF**
-
-I enjoy the process as much as the scoreboard: breaking down unfamiliar challenges, documenting what I learn, and improving my methodology with every event.
-
 ## GitHub activity
 
 <div align="center">
