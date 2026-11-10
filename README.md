@@ -91,6 +91,16 @@ A few projects and experiments from my GitHub:
 
 </div>
 
+## Project board
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/projects/projects.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/projects/projects-light.svg" />
+    <img width="100%" src="https://raw.githubusercontent.com/H3M4N1H/H3M4N1H/projects/projects.svg" alt="Live project board" />
+  </picture>
+</div>
+
 ## CTF & achievements
 
 - 🥉 **3rd Place — CryptClash CTF**, Techastra '26 (solo)
