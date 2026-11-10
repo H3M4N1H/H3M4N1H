@@ -70,25 +70,6 @@ I spend my time exploring offensive security, solving CTF challenges, learning h
 
 </div>
 
-## Selected work
-
-A few projects and experiments from my GitHub:
-
-- **[SafeKey](https://github.com/H3M4N1H/SafeKey)** - local-first password manager focused on privacy and secure credential storage.
-- **[CipherX](https://github.com/H3M4N1H/CipherX)** - terminal-based multi-layer cipher and encoding challenge solver.
-- **[SpecterNet](https://github.com/H3M4N1H/SpecterNet)** - network capture and analysis suite.
-- **[Aegis](https://github.com/H3M4N1H/Aegis)** - evidence-first SOC and deception-lab project.
-- **[ThrustGuard](https://github.com/H3M4N1H/ThrustGuard-GUI)** - IoT behavioral trust scoring and anomaly detection.
-- **[Snipe](https://github.com/H3M4N1H/snipe)** - alerts for hackathons, internships and CTF opportunities.
-
-<div align="center">
-
-  <a href="https://github.com/H3M4N1H?tab=repositories">
-    <img src="https://img.shields.io/badge/Explore_all_repositories-181825?style=for-the-badge&logo=github&logoColor=white" alt="Explore repositories" />
-  </a>
-
-</div>
-
 ## GitHub activity
 
 <div align="center">
