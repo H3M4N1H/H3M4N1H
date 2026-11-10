@@ -20,7 +20,7 @@
 
 ## About
 
-I'm **P. Hemanth Gupta**, a cybersecurity-focused developer.
+I'm **P. Hemanth Gupta**, a cybersecurity enthusiast.
 
 I spend my time exploring offensive security, solving CTF challenges, learning how software behaves under pressure, and building practical tools. I enjoy moving between security research and development - from understanding a vulnerability to writing code that helps investigate or prevent it.
 
