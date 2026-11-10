@@ -20,7 +20,7 @@
 
 ## About
 
-I'm **P. Hemanth Gupta**, a Computer Science and Engineering (Cyber Security) undergraduate at **Velammal Engineering College, Chennai**.
+I'm **P. Hemanth Gupta**, a cybersecurity-focused developer.
 
 I spend my time exploring offensive security, solving CTF challenges, learning how software behaves under pressure, and building practical tools. I enjoy moving between security research and development — from understanding a vulnerability to writing code that helps investigate or prevent it.
 
