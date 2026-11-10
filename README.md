@@ -25,7 +25,7 @@ I'm **P. Hemanth Gupta**, a Computer Science and Engineering (Cyber Security) un
 I spend my time exploring offensive security, solving CTF challenges, learning how software behaves under pressure, and building practical tools. I enjoy moving between security research and development — from understanding a vulnerability to writing code that helps investigate or prevent it.
 
 - 🎯 **Focus:** Web security, penetration-testing fundamentals, networking and CTFs
-- 🧪 **Building:** Security tools, automation and experimental projects
+- 🧪 **Building:** Security tools, automation and practical developer projects
 - 🏢 **Founder:** [NodeKraft](https://nodekraft.tech) — digital solutions and automation
 - 🎨 **Community:** Creator Head & Core Member at Cyventura; Designer at Cybercom
 - 📍 **Based in:** Chennai, India
@@ -37,7 +37,6 @@ I spend my time exploring offensive security, solving CTF challenges, learning h
 | Offensive security | Web vulnerabilities, reconnaissance, Linux and practical VAPT workflows |
 | CTFs | Web, crypto, misc and hands-on problem solving |
 | Development | Python, Java, web technologies and useful automation |
-| Research & experimentation | GLITCHLAB — a hardware fault-injection and resilience-testing research project |
 
 ## Tech stack
 
@@ -75,7 +74,6 @@ I spend my time exploring offensive security, solving CTF challenges, learning h
 
 A few projects and experiments from my GitHub:
 
-- **[GLITCHLAB](https://github.com/H3M4N1H/glitchlab)** — research-oriented hardware fault-injection and resilience-testing framework. *Private repository / active development.*
 - **[SafeKey](https://github.com/H3M4N1H/SafeKey)** — local-first password manager focused on privacy and secure credential storage.
 - **[CipherX](https://github.com/H3M4N1H/CipherX)** — terminal-based multi-layer cipher and encoding challenge solver.
 - **[SpecterNet](https://github.com/H3M4N1H/SpecterNet)** — network capture and analysis suite.
